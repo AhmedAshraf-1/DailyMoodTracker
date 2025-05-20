@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.Font?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+
+<BorderPane fx:id="mainContainer" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.dailymoodtracker.controller.PreferencesController"
+      styleClass="preferences-container"
+      prefWidth="900" prefHeight="700">
+    
+    <!-- Top Header -->
+    <top>
+        <VBox alignment="CENTER" spacing="8" styleClass="preferences-header">
+            <padding>
+                <Insets top="30" right="30" bottom="30" left="30"/>
+            </padding>
+            <Label text="Preferences" styleClass="preferences-title"/>
+            <Label text="Customize your Daily Mood Tracker experience" styleClass="preferences-subtitle"/>
+        </VBox>
+    </top>
+    
+    <!-- Main Content -->
+    <center>
+        <ScrollPane fitToWidth="true" styleClass="preferences-content-scroll">
+            <VBox spacing="30" styleClass="preferences-content-container">
+                <padding>
+                    <Insets top="30" right="30" bottom="30" left="30"/>
+                </padding>
+                
+                <!-- API Configuration Section -->
+                <VBox spacing="20" styleClass="settings-section">
+                    <Label text="Sentiment Analysis API" styleClass="section-header"/>
+                    
+                    <Label text="Configure your Python-based sentiment analysis API settings"
+                           styleClass="section-description"/>
+                           
+                    <!-- API URL -->
+                    <HBox styleClass="form-row">
+                        <Label text="API URL:" styleClass="form-label"/>
+                        <TextField fx:id="apiKeyTextField" prefWidth="400" promptText="http://localhost:5000/analyze"
+                                  styleClass="form-field"/>
+                    </HBox>
+                    
+                    <!-- Test API Button -->
+                    <HBox styleClass="form-row">
+                        <Label text="" styleClass="form-label"/>
+                        <HBox spacing="15" alignment="CENTER_LEFT">
+                            <Button fx:id="testApiButton" text="Test API Connection" onAction="#testApiCredentials"
+                                  styleClass="preferences-button, primary-button"/>
+                            <Label fx:id="apiStatusLabel" text="API status will appear here" styleClass="status-label"/>
+                        </HBox>
+                    </HBox>
+                    
+                    <!-- API Info -->
+                    <VBox styleClass="preview-panel">
+                        <Label text="About the Sentiment Analysis API" styleClass="preview-title"/>
+                        <Text fill="white" wrappingWidth="800">
+                            This application uses a custom Python API with Hugging Face's DistilBERT model for sentiment analysis.
+                            The API analyzes text to determine emotional tone and helps the chatbot respond appropriately.
+                            If the API is not available, the application will fall back to a dummy service.
+                        </Text>
+                    </VBox>
+                </VBox>
+                
+                <!-- Themes Section -->
+                <VBox spacing="20" styleClass="settings-section">
+                    <Label text="Theme Settings" styleClass="section-header"/>
+                    
+                    <Label text="Customize the appearance of your Daily Mood Tracker"
+                           styleClass="section-description"/>
+                    
+                    <!-- Theme Selection -->
+                    <HBox styleClass="form-row">
+                        <Label text="Application Theme:" styleClass="form-label"/>
+                        <ComboBox fx:id="themeComboBox" prefWidth="250" onAction="#onThemeChanged"
+                                 styleClass="preferences-combo-box">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Dark"/>
+                                    <String fx:value="Light"/>
+                                    <String fx:value="Blue"/>
+                                    <String fx:value="Purple"/>
+                                    <String fx:value="Green"/>
+                                </FXCollections>
+                            </items>
+                        </ComboBox>
+                    </HBox>
+                    
+                    <!-- Accent Color Selection -->
+                    <HBox styleClass="form-row">
+                        <Label text="Accent Color:" styleClass="form-label"/>
+                        <ComboBox fx:id="accentColorComboBox" prefWidth="250" onAction="#onAccentColorChanged"
+                                 styleClass="preferences-combo-box">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Green"/>
+                                    <String fx:value="Blue"/>
+                                    <String fx:value="Purple"/>
+                                    <String fx:value="Orange"/>
+                                    <String fx:value="Red"/>
+                                    <String fx:value="Pink"/>
+                                    <String fx:value="Teal"/>
+                                </FXCollections>
+                            </items>
+                        </ComboBox>
+                    </HBox>
+                    
+                    <!-- Theme Preview -->
+                    <VBox styleClass="preview-panel">
+                        <Label text="Theme Preview" styleClass="preview-title"/>
+                        <HBox fx:id="themePreview" spacing="15" alignment="CENTER_LEFT" prefHeight="120">
+                            <!-- Preview content will be populated by controller -->
+                        </HBox>
+                    </VBox>
+                </VBox>
+                
+                <!-- Mood Scale Section -->
+                <VBox spacing="20" styleClass="settings-section">
+                    <Label text="Mood Scale Settings" styleClass="section-header"/>
+                    
+                    <Label text="Choose how you want to record your moods"
+                           styleClass="section-description"/>
+                    
+                    <!-- Mood Scale Selection -->
+                    <HBox styleClass="form-row">
+                        <Label text="Mood Scale Points:" styleClass="form-label"/>
+                        <ComboBox fx:id="moodScaleComboBox" prefWidth="250" onAction="#onMoodScaleChanged"
+                                 styleClass="preferences-combo-box">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="3-point"/>
+                                    <String fx:value="5-point"/>
+                                    <String fx:value="10-point"/>
+                                </FXCollections>
+                            </items>
+                        </ComboBox>
+                    </HBox>
+                    
+                    <!-- Mood Scale Preview -->
+                    <VBox styleClass="preview-panel">
+                        <Label text="Mood Scale Preview" styleClass="preview-title"/>
+                        <HBox fx:id="moodScalePreview" spacing="10" alignment="CENTER" prefHeight="80">
+                            <!-- Mood scale buttons will be populated by controller -->
+                        </HBox>
+                    </VBox>
+                </VBox>
+                
+                <!-- Activity Categories Section -->
+                <VBox spacing="20" styleClass="settings-section">
+                    <Label text="Activity Categories" styleClass="section-header"/>
+                    
+                    <Label text="Manage custom activities and categories to track with your moods"
+                           styleClass="section-description"/>
+                    
+                    <!-- Categories List -->
+                    <HBox spacing="20">
+                        <!-- Categories List -->
+                        <VBox spacing="10" HBox.hgrow="ALWAYS">
+                            <Label text="Categories:" styleClass="form-label"/>
+                            <ListView fx:id="categoriesListView" prefHeight="180" 
+                                     onMouseClicked="#onCategorySelected"
+                                     styleClass="preferences-list-view"/>
+                        </VBox>
+                        
+                        <!-- Activities List -->
+                        <VBox spacing="10" HBox.hgrow="ALWAYS">
+                            <Label text="Activities:" styleClass="form-label"/>
+                            <ListView fx:id="activitiesListView" prefHeight="180"
+                                     styleClass="preferences-list-view"/>
+                        </VBox>
+                    </HBox>
+                    
+                    <!-- Add Category/Activity -->
+                    <HBox spacing="15" alignment="CENTER_LEFT">
+                        <TextField fx:id="newItemTextField" promptText="New category or activity name" 
+                                  HBox.hgrow="ALWAYS" styleClass="form-field"/>
+                        <Button text="Add Category" onAction="#onAddCategory"
+                               styleClass="preferences-button, success-button"/>
+                        <Button text="Add Activity" onAction="#onAddActivity"
+                               styleClass="preferences-button, primary-button"/>
+                        <Button text="Remove" onAction="#onRemoveItem"
+                               styleClass="preferences-button, danger-button"/>
+                    </HBox>
+                </VBox>
+                
+                <!-- Personal Goals Section -->
+                <VBox spacing="20" styleClass="settings-section">
+                    <Label text="Personal Goals" styleClass="section-header"/>
+                    
+                    <Label text="Set and track your personal well-being goals"
+                           styleClass="section-description"/>
+                    
+                    <!-- Goals List -->
+                    <ListView fx:id="goalsListView" prefHeight="180"
+                             styleClass="preferences-list-view"/>
+                    
+                    <!-- Add Goal -->
+                    <HBox spacing="15" alignment="CENTER_LEFT">
+                        <TextField fx:id="newGoalTextField" promptText="New goal" 
+                                  HBox.hgrow="ALWAYS" styleClass="form-field"/>
+                        <Button text="Add Goal" onAction="#onAddGoal"
+                               styleClass="preferences-button, success-button"/>
+                        <Button text="Remove Goal" onAction="#onRemoveGoal"
+                               styleClass="preferences-button, danger-button"/>
+                    </HBox>
+                </VBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+    
+    <!-- Bottom Buttons -->
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" spacing="15" styleClass="action-bar">
+            <Button text="Save Changes" onAction="#onSave" defaultButton="true"
+                   styleClass="preferences-button, success-button"/>
+            <Button text="Cancel" onAction="#onCancel" cancelButton="true"
+                   styleClass="preferences-button"/>
+        </HBox>
+    </bottom>
+    
+    <stylesheets>
+        <String fx:value="/styles/main.css"/>
+        <String fx:value="/styles/preferences.css"/>
+    </stylesheets>
+</BorderPane> 

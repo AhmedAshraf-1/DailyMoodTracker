@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="rootVBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="500.0" spacing="15.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dailymoodtracker.controller.SettingsController">
+   <children>
+      <Label text="Application Settings" textFill="#2c3e50">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Separator prefWidth="200.0" />
+      <Label text="AI Sentiment Analysis Service" textFill="#2c3e50">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label text="Select the service to use for analyzing messages and providing responses:" wrapText="true" />
+      <VBox spacing="10.0">
+         <children>
+            <VBox spacing="5.0">
+               <children>
+                  <RadioButton fx:id="rbHttp" mnemonicParsing="false" text="Python HTTP Service" />
+                  <Label fx:id="lblHttpStatus" text="Status: Not available" textFill="RED">
+                     <VBox.margin>
+                        <Insets left="25.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label text="Local sentiment analysis using the Python microservice." textFill="#666666">
+                     <VBox.margin>
+                        <Insets left="25.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox spacing="5.0">
+               <children>
+                  <RadioButton fx:id="rbPython" mnemonicParsing="false" text="Python Local Service" />
+                  <Label fx:id="lblPythonStatus" text="Status: Not available" textFill="RED">
+                     <VBox.margin>
+                        <Insets left="25.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label text="Fast local sentiment analysis using pre-trained models." textFill="#666666">
+                     <VBox.margin>
+                        <Insets left="25.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox spacing="5.0">
+               <children>
+                  <RadioButton fx:id="rbDummy" mnemonicParsing="false" text="Dummy Service (Demo)" />
+                  <Label text="Uses pre-set responses with no actual AI analysis." textFill="#666666">
+                     <VBox.margin>
+                        <Insets left="25.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <Separator prefWidth="200.0" />
+      <HBox alignment="CENTER_RIGHT" spacing="10.0">
+         <children>
+            <Button fx:id="btnCancel" cancelButton="true" mnemonicParsing="false" onAction="#handleCancel" text="Cancel" />
+            <Button fx:id="btnSave" defaultButton="true" mnemonicParsing="false" onAction="#handleSave" text="Save" />
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</VBox> 

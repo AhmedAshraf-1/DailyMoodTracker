@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            stylesheets="/styles/main.css"
+            styleClass="dashboard-container"
+            prefWidth="1000" 
+            prefHeight="700">
+
+    <!-- Top Navigation Bar with Premium Styling -->
+    <top>
+        <VBox styleClass="nav-bar">
+            <HBox alignment="CENTER_LEFT" spacing="15">
+                <padding>
+                    <Insets top="10" right="20" bottom="10" left="20"/>
+                </padding>
+                
+                <ImageView fitWidth="40" fitHeight="40" preserveRatio="true">
+                    <Image url="@../images/App_logo.jpg"/>
+                </ImageView>
+                
+                <Label text="Dashboard" styleClass="app-title"/>
+                
+                <Region HBox.hgrow="ALWAYS"/>
+                
+                <HBox spacing="15" alignment="CENTER_RIGHT">
+                    <Button fx:id="journalButton" text="Journal" onAction="#openJournal" styleClass="nav-button"/>
+                    <Button fx:id="chatbotButton" text="Chatbot" onAction="#openChatbot" styleClass="nav-button"/>
+                    <Button fx:id="remindersButton" text="Reminders" onAction="#openRemindersDialog" styleClass="nav-button"/>
+                    <Button fx:id="historyButton" text="History" onAction="#showHistory" styleClass="nav-button"/>
+                    <Button fx:id="achievementsButton" text="Achievements" onAction="#showAchievements" styleClass="nav-button"/>
+                    <Button fx:id="preferencesButton" text="Preferences" onAction="#showPreferences" styleClass="nav-button"/>
+                    <Button fx:id="logoutButton" text="Logout" onAction="#logout" styleClass="nav-button"/>
+                </HBox>
+            </HBox>
+            
+            <Separator />
+        </VBox>
+    </top>
+    
+    <!-- Main Dashboard Content -->
+    <center>
+        <ScrollPane fitToWidth="true" styleClass="content-area">
+            <VBox spacing="30">
+                <padding>
+                    <Insets top="30" right="40" bottom="30" left="40"/>
+                </padding>
+                
+                <!-- Welcome Section -->
+                <VBox styleClass="section-container, history-header" spacing="15">
+                    <padding>
+                        <Insets top="25" right="25" bottom="25" left="25"/>
+                    </padding>
+                    
+                    <HBox alignment="CENTER_LEFT" spacing="15">
+                        <Label fx:id="welcomeEmoji" text="👋" style="-fx-font-size: 36px;"/>
+                        
+                        <VBox spacing="5">
+                            <Label fx:id="welcomeLabel" text="Welcome back, User!" styleClass="dashboard-title"/>
+                            <Label fx:id="dateLabel" text="Today is Monday, January 1" styleClass="dashboard-subtitle"/>
+                        </VBox>
+                    </HBox>
+                </VBox>
+                
+                <!-- Stats Summary -->
+                <HBox spacing="20">
+                    <!-- Mood Average Card -->
+                    <VBox styleClass="stat-card" HBox.hgrow="ALWAYS" alignment="CENTER">
+                        <padding>
+                            <Insets top="20" right="20" bottom="20" left="20"/>
+                        </padding>
+                        
+                        <Label text="Average Mood" styleClass="stat-label"/>
+                        <HBox alignment="CENTER" spacing="10">
+                            <Label fx:id="averageMoodEmoji" text="😊" style="-fx-font-size: 32px;"/>
+                            <Label fx:id="averageMoodValue" text="4.2" styleClass="stat-value"/>
+                        </HBox>
+                        <Label fx:id="moodTrendLabel" text="↗ Trending upward" style="-fx-text-fill: -fx-success;"/>
+                    </VBox>
+                    
+                    <!-- Entry Count Card -->
+                    <VBox styleClass="stat-card" HBox.hgrow="ALWAYS" alignment="CENTER">
+                        <padding>
+                            <Insets top="20" right="20" bottom="20" left="20"/>
+                        </padding>
+                        
+                        <Label text="Journal Entries" styleClass="stat-label"/>
+                        <Label fx:id="entryCountValue" text="28" styleClass="stat-value"/>
+                        <Label text="This month" style="-fx-text-fill: -fx-text-secondary;"/>
+                    </VBox>
+                    
+                    <!-- Streak Card -->
+                    <VBox styleClass="stat-card" HBox.hgrow="ALWAYS" alignment="CENTER">
+                        <padding>
+                            <Insets top="20" right="20" bottom="20" left="20"/>
+                        </padding>
+                        
+                        <Label text="Current Streak" styleClass="stat-label"/>
+                        <HBox alignment="CENTER" spacing="10">
+                            <Label text="🔥" style="-fx-font-size: 32px;"/>
+                            <Label fx:id="streakValue" text="7" styleClass="stat-value"/>
+                        </HBox>
+                        <Label text="days in a row" style="-fx-text-fill: -fx-text-secondary;"/>
+                    </VBox>
+                </HBox>
+                
+                <!-- Charts Section -->
+                <HBox spacing="20">
+                    <!-- Mood Trends Chart -->
+                    <VBox styleClass="chart-container" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                        <padding>
+                            <Insets top="20" right="20" bottom="20" left="20"/>
+                        </padding>
+                        
+                        <Label text="Mood Trends" styleClass="section-title"/>
+                        
+                        <LineChart fx:id="moodChart" legendVisible="false">
+                            <xAxis>
+                                <CategoryAxis label="Last 7 Days" />
+                            </xAxis>
+                            <yAxis>
+                                <NumberAxis label="Mood Level" />
+                            </yAxis>
+                        </LineChart>
+                    </VBox>
+                    
+                    <!-- Mood Distribution -->
+                    <VBox styleClass="chart-container" HBox.hgrow="ALWAYS" maxWidth="350">
+                        <padding>
+                            <Insets top="20" right="20" bottom="20" left="20"/>
+                        </padding>
+                        
+                        <Label text="Mood Distribution" styleClass="section-title"/>
+                        
+                        <PieChart fx:id="moodDistributionChart" labelsVisible="true" />
+                    </VBox>
+                </HBox>
+                
+                <!-- Activity and Tools Section -->
+                <HBox spacing="20">
+                    <!-- Activity Analysis -->
+                    <VBox styleClass="section-container" HBox.hgrow="ALWAYS">
+                        <padding>
+                            <Insets top="20" right="20" bottom="20" left="20"/>
+                        </padding>
+                        
+                        <Label text="Activity Impact" styleClass="section-title"/>
+                        <Label text="Activities that boost your mood" 
+                               style="-fx-text-fill: -fx-text-secondary; -fx-font-size: 14px;"/>
+                        
+                        <VBox fx:id="activityImpactContainer" spacing="10">
+                            <!-- Activity items will be added here dynamically -->
+                        </VBox>
+                    </VBox>
+                    
+                    <!-- Tools Section -->
+                    <VBox styleClass="card" spacing="10" maxWidth="300">
+                        <padding>
+                            <Insets top="20" right="20" bottom="20" left="20" />
+                        </padding>
+                        <Label text="Tools" styleClass="section-title" />
+                        
+                        <Button text="Export Data" styleClass="button-outlined" maxWidth="Infinity" />
+                        <Button text="Import Data" styleClass="button-outlined" maxWidth="Infinity" />
+                        <Button text="Generate Report" styleClass="button-outlined" maxWidth="Infinity" />
+                        <Button fx:id="aiSettingsButton" text="AI Settings" styleClass="button-outlined" maxWidth="Infinity" />
+                        <Button text="AI Mood Assistant" styleClass="button-secondary" maxWidth="Infinity" 
+                                onAction="#openChatbot">
+                            <graphic>
+                                <ImageView fitWidth="20" fitHeight="20" preserveRatio="true">
+                                    <image>
+                                        <Image url="/images/chatbot_icon.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                    </VBox> 
+                </HBox>
+                
+                <!-- Recent Entries and Suggestions -->
+                <HBox spacing="20">
+                    <!-- Recent Entries -->
+                    <VBox styleClass="section-container" HBox.hgrow="ALWAYS">
+                        <padding>
+                            <Insets top="20" right="20" bottom="20" left="20"/>
+                        </padding>
+                        
+                        <HBox alignment="CENTER_LEFT">
+                            <Label text="Recent Entries" styleClass="section-title"/>
+                            <Region HBox.hgrow="ALWAYS" />
+                            <Button text="View All" styleClass="button-outlined" onAction="#showHistory"/>
+                        </HBox>
+                        
+                        <VBox fx:id="recentEntriesContainer" spacing="15">
+                            <!-- Recent entries will be added here dynamically -->
+                        </VBox>
+                    </VBox>
+                    
+                    <!-- Suggestions -->
+                    <VBox styleClass="section-container" HBox.hgrow="ALWAYS" maxWidth="350">
+                        <padding>
+                            <Insets top="20" right="20" bottom="20" left="20"/>
+                        </padding>
+                        
+                        <Label text="Personalized Suggestions" styleClass="section-title"/>
+                        
+                        <VBox fx:id="suggestionsContainer" spacing="15">
+                            <!-- Suggestions will be added here dynamically -->
+                        </VBox>
+                        
+                        <Region VBox.vgrow="ALWAYS" />
+                        
+                        <Button text="Get More Suggestions" styleClass="button-secondary" 
+                                maxWidth="Infinity" onAction="#openChatbot"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane> 

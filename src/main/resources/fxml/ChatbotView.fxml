@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import java.lang.String?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.dailymoodtracker.controller.ChatbotController"
+      stylesheets="/styles/main.css"
+      styleClass="main-container"
+      prefWidth="1000" prefHeight="700">
+
+    <!-- Header -->
+    <top>
+        <VBox styleClass="nav-bar">
+            <HBox alignment="CENTER_LEFT" spacing="15">
+                <padding>
+                    <Insets top="10" right="20" bottom="10" left="20"/>
+                </padding>
+                
+                <ImageView fitWidth="40" fitHeight="40" preserveRatio="true">
+                    <Image url="@../images/App_logo.jpg"/>
+                </ImageView>
+                
+                <Label text="Mood Assistant" styleClass="app-title"/>
+                
+                <Region HBox.hgrow="ALWAYS" />
+                
+                <Button fx:id="dashboardButton" text="Dashboard" styleClass="nav-button" />
+                <Button fx:id="historyButton" text="History" styleClass="nav-button" />
+                <Button fx:id="settingsButton" text="Settings" styleClass="nav-button" />
+            </HBox>
+            
+            <Separator />
+        </VBox>
+    </top>
+    
+    <!-- Chat Area -->
+    <center>
+        <VBox fx:id="chatContainer" spacing="15" styleClass="content-area">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            
+            <!-- Info Card -->
+            <HBox styleClass="section-container, support-card" alignment="CENTER_LEFT" spacing="15">
+                <padding>
+                    <Insets top="15" right="20" bottom="15" left="20"/>
+                </padding>
+                
+                <Label text="💭" style="-fx-font-size: 28px;"/>
+                
+                <VBox spacing="5">
+                    <Label text="Your Supportive Mental Health Assistant" style="-fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: white;"/>
+                    <Label text="I'm here to listen, support, and offer guidance when you need it. Share how you're feeling, and I'll respond with empathy and helpful resources." 
+                           wrapText="true" style="-fx-text-fill: -fx-text-secondary; -fx-font-size: 14px;"/>
+                </VBox>
+                
+                <Region HBox.hgrow="ALWAYS" />
+                
+                <Button fx:id="feedbackButton" text="Improve AI 🧠" styleClass="feedback-button">
+                    <tooltip>
+                        <Tooltip text="Help improve the AI by providing feedback on responses" />
+                    </tooltip>
+                </Button>
+            </HBox>
+            
+            <!-- Chat List with improved styling -->
+            <ListView fx:id="chatListView" VBox.vgrow="ALWAYS" styleClass="chat-list">
+                <effect>
+                    <DropShadow color="rgba(0, 0, 0, 0.2)" radius="10" spread="0.05"/>
+                </effect>
+            </ListView>
+            
+            <!-- Quick Responses -->
+            <HBox spacing="10" alignment="CENTER" styleClass="quick-response-container">
+                <padding>
+                    <Insets top="5" bottom="5"/>
+                </padding>
+                <Button fx:id="feelingAnxiousButton" text="I'm feeling anxious" styleClass="quick-response-button"/>
+                <Button fx:id="feelingSadButton" text="I'm feeling sad" styleClass="quick-response-button"/>
+                <Button fx:id="needBreathingButton" text="Need a breathing exercise" styleClass="quick-response-button"/>
+                <Button fx:id="needGratitudeButton" text="Show me gratitude prompts" styleClass="quick-response-button"/>
+            </HBox>
+            
+            <!-- Input Area with enhanced design -->
+            <HBox spacing="10" alignment="CENTER">
+                <padding>
+                    <Insets top="5" bottom="5"/>
+                </padding>
+                <TextField fx:id="messageInput" promptText="Share how you're feeling..." 
+                          HBox.hgrow="ALWAYS" styleClass="message-input"/>
+                
+                <Button fx:id="sendButton" styleClass="send-button">
+                    <graphic>
+                        <Text text="➤" style="-fx-fill: white; -fx-font-size: 16px;"/>
+                    </graphic>
+                </Button>
+            </HBox>
+        </VBox>
+    </center>
+    
+    <!-- Right Sidebar with expanded mental health tools -->
+    <right>
+        <VBox styleClass="section-container" prefWidth="280">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            
+            <Label text="Emotion Analysis" styleClass="section-title"/>
+            
+            <VBox styleClass="emotion-analysis" spacing="15">
+                <padding>
+                    <Insets top="15" right="15" bottom="15" left="15"/>
+                </padding>
+                
+                <Label text="How You're Feeling" styleClass="section-header"/>
+                
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <Label text="Positive:" minWidth="70"/>
+                    <ProgressBar fx:id="positiveBar" progress="0.0" prefWidth="120" style="-fx-accent: #4CAF50;"/>
+                    <Label fx:id="positiveLabel" text="0%" minWidth="35"/>
+                </HBox>
+                
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <Label text="Neutral:" minWidth="70"/>
+                    <ProgressBar fx:id="neutralBar" progress="0.0" prefWidth="120" style="-fx-accent: #FFC107;"/>
+                    <Label fx:id="neutralLabel" text="0%" minWidth="35"/>
+                </HBox>
+                
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <Label text="Negative:" minWidth="70"/>
+                    <ProgressBar fx:id="negativeBar" progress="0.0" prefWidth="120" style="-fx-accent: #F44336;"/>
+                    <Label fx:id="negativeLabel" text="0%" minWidth="35"/>
+                </HBox>
+                
+                <Label fx:id="dominantEmotionLabel" text="Your dominant emotion: --"/>
+            </VBox>
+            
+            <Separator>
+                <padding>
+                    <Insets top="15" bottom="15"/>
+                </padding>
+            </Separator>
+            
+            <Label text="Mental Wellness Toolkit" styleClass="section-title"/>
+            
+            <TitledPane text="Coping Strategies" expanded="false" styleClass="wellness-pane">
+                <VBox spacing="10">
+                    <Button fx:id="breathingExerciseButton" text="Breathing Exercise" styleClass="wellness-button" maxWidth="Infinity"/>
+                    <Button fx:id="groundingTechniqueButton" text="5-4-3-2-1 Grounding" styleClass="wellness-button" maxWidth="Infinity"/>
+                    <Button fx:id="positiveAffirmationButton" text="Positive Affirmations" styleClass="wellness-button" maxWidth="Infinity"/>
+                    <Button fx:id="thoughtReframingButton" text="Thought Reframing" styleClass="wellness-button" maxWidth="Infinity"/>
+                </VBox>
+            </TitledPane>
+            
+            <TitledPane text="Mood Journal" expanded="false" styleClass="wellness-pane">
+                <VBox spacing="10">
+                    <Button fx:id="recordMoodButton" text="Record Current Mood" styleClass="wellness-button" maxWidth="Infinity"/>
+                    <Button fx:id="viewMoodHistoryButton" text="View Mood Patterns" styleClass="wellness-button" maxWidth="Infinity"/>
+                    <Button fx:id="gratitudeJournalButton" text="Gratitude Journal" styleClass="wellness-button" maxWidth="Infinity"/>
+                </VBox>
+            </TitledPane>
+            
+            <TitledPane text="Resources" expanded="false" styleClass="wellness-pane">
+                <VBox spacing="10">
+                    <Button fx:id="selfCareChecklistButton" text="Self-Care Checklist" styleClass="wellness-button" maxWidth="Infinity"/>
+                    <Button fx:id="wellnessActivitiesButton" text="Wellness Activities" styleClass="wellness-button" maxWidth="Infinity"/>
+                    <Button fx:id="crisisResourcesButton" text="Crisis Resources" styleClass="wellness-button, crisis-button" maxWidth="Infinity"/>
+                </VBox>
+            </TitledPane>
+            
+            <Separator>
+                <padding>
+                    <Insets top="15" bottom="15"/>
+                </padding>
+            </Separator>
+            
+            <Label fx:id="supportReminderLabel" text="Remember: It's okay to not be okay. Reaching out for support is a sign of strength." 
+                   wrapText="true" styleClass="support-message"/>
+        </VBox>
+    </right>
+</BorderPane> 

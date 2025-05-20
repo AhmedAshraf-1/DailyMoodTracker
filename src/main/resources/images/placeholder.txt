@@ -1,0 +1,8 @@
+This is a placeholder file to ensure the images directory exists.
+
+You should add the following image files to this directory:
+- chatbot_icon.png - An icon for the chatbot button and header
+- info_icon.png - An icon for the info card in the chatbot interface
+- mood_logo.png - The main application logo
+
+These can be simple icons that match your application's style. 

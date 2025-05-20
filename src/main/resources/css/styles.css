@@ -1,0 +1,111 @@
+.root {
+    -fx-background-color: white;
+    -fx-font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.title-label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.section-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.button {
+    -fx-background-color: #f0f0f0;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-padding: 8 15;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #e0e0e0;
+}
+
+#saveButton {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-padding: 10 20;
+}
+
+#saveButton:hover {
+    -fx-background-color: #45a049;
+}
+
+#historyButton {
+    -fx-background-color: #2196F3;
+    -fx-text-fill: white;
+}
+
+#historyButton:hover {
+    -fx-background-color: #1976D2;
+}
+
+.mood-button {
+    -fx-font-size: 24px;
+    -fx-min-width: 50px;
+    -fx-min-height: 50px;
+    -fx-background-color: transparent;
+    -fx-border-color: #ddd;
+    -fx-border-radius: 25;
+}
+
+.mood-button:hover {
+    -fx-background-color: #f8f8f8;
+}
+
+#quoteContainer {
+    -fx-background-color: #f5f5f5;
+    -fx-background-radius: 5;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 5;
+    -fx-padding: 15;
+}
+
+.quote-text {
+    -fx-font-style: italic;
+    -fx-font-size: 14px;
+}
+
+.text-area {
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-border-color: #ddd;
+}
+
+.check-box {
+    -fx-padding: 5;
+}
+
+.separator {
+    -fx-padding: 10 0;
+}
+
+.text-area {
+    -fx-background-color: #f5f5f5;
+    -fx-background-radius: 4px;
+    -fx-border-radius: 4px;
+    -fx-border-color: #e0e0e0;
+    -fx-padding: 8px;
+}
+
+.check-box {
+    -fx-font-size: 14px;
+}
+
+.label {
+    -fx-text-fill: #333333;
+}
+
+#quoteLabel {
+    -fx-text-fill: #666666;
+    -fx-font-style: italic;
+}
+
+.button:pressed {
+    -fx-background-color: #3d8b40;
+} 
